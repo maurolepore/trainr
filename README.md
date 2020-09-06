@@ -16,7 +16,7 @@ Reproducible but static ‘rmarkdown’ documents abound. For example, many
 R packages include them in README.Rmd and vignettes. You can transform
 each ‘rmarkdown’ code chunk into an R console using the learnr exercises
 (<https://rstudio.github.io/learnr/exercises.html>). But the
-transformation can be tedious (e.g. label unlabeled code chunks and
+transformation can be tedious (e.g. label unlabelled code chunks and
 chain exercises setup). This package automates the process.
 
 ## Installation
@@ -57,8 +57,8 @@ writeLines(head(readLines(url), 10))
     
     ```{r setup, include = FALSE}
     knitr::opts_chunk$set(
+      cache = FALSE,
       collapse = TRUE,
-      comment = "#>",
 
 Convert each executable chunk to an ‘learnr’ exercise.
 

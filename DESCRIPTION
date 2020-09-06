@@ -27,3 +27,5 @@ Imports:
     xfun
 Suggests: 
     learnr
+URL: https://github.com/maurolepore/trainr
+BugReports: https://github.com/maurolepore/trainr/issues
