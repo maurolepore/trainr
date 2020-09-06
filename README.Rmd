@@ -65,3 +65,38 @@ Have a look to this file after the transformation.
 ```{r, results='asis'}
 writeLines(head(readLines(path), 20))
 ```
+
+Play.
+
+```{r}
+if (interactive()) {
+  rmarkdown::run(path)
+}
+```
+
+
+Code that prints anything to the console should be at the end of any one chunk.
+
+* Good:
+
+```{r}
+x <- 1
+message("Good: Output something to the console at the end of the code chunk")
+```
+
+* Bad:
+
+```{r}
+message("Bad: Output something to the console before the end of the code chunk")
+x <- 1
+```
+
+* Also bad:
+
+```{r}
+x <- 1
+# Bad: Output something to the console before the end of the code chunk
+x
+y <- 2
+```
+
