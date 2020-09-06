@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![CRAN
+status](https://www.r-pkg.org/badges/version/trainr)](https://CRAN.R-project.org/package=trainr)
 <!-- badges: end -->
 
 The goal of trainr is to create interactive exercises from static
@@ -98,8 +100,8 @@ writeLines(readLines(url))
     
     Have a look to this file as is:
     
-    ```{r}
-    readLines(url)
+    ```{r, comment=""}
+    writeLines(readLines(url))
     ```
     
     Convert each executable chunk to an 'learnr' exercise.
@@ -111,8 +113,8 @@ writeLines(readLines(url))
     
     Have a look to this file after the transformation.
     
-    ```{r}
-    readLines(path)
+    ```{r, comment=""}
+    writeLines(readLines(path))
     ```
     
     Play.
@@ -234,8 +236,8 @@ writeLines(readLines(path))
     
     Have a look to this file as is:
     
-    ```{r unlabeled-52, exercise.setup='unlabeled-46'}
-    readLines(url)
+    ```{r unlabeled-52, comment="", exercise.setup='unlabeled-46'}
+    writeLines(readLines(url))
     ```
     
     Convert each executable chunk to an 'learnr' exercise.
@@ -247,8 +249,8 @@ writeLines(readLines(path))
     
     Have a look to this file after the transformation.
     
-    ```{r unlabeled-65, exercise.setup='unlabeled-58'}
-    readLines(path)
+    ```{r unlabeled-65, comment="", exercise.setup='unlabeled-58'}
+    writeLines(readLines(path))
     ```
     
     Play.
@@ -285,13 +287,13 @@ writeLines(readLines(path))
     y <- 2
     ```
 
-Play.
+Enjoy\!
 
 ``` r
-if (interactive()) {
-  rmarkdown::run(path)
-}
+rmarkdown::run(path)
 ```
+
+## Avoid problems
 
 Code that prints anything to the console should be at the end of any one
 chunk.
