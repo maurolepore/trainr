@@ -1,108 +1,3 @@
-# TODO: Heper for `rmarkdown::run(file = "path/tutorial.Rmd")`
-# Helper to get common articles with url_readme("owner/repo@branch")
-# Helper to get common articles with url_get_started("owner/repo@branch")
-# Helper to get common articles with url_article("owner/repo@branch", "article")
-
-to_exercises_from_readme <- function() {
-  # README
-  package <- c("r2dii.data", "r2dii.match", "r2dii.analysis")
-  pkg <- sub("\\.", "-", package)
-
-  raw <- sprintf(
-    "https://raw.githubusercontent.com/maurolepore/%s/label-chunks", package
-  )
-  url <- sprintf("%s/README.Rmd", raw)
-
-  welcome <- sprintf("First steps with %s", pkg)
-
-  suffix <- paste0(pkg, "-first-steps")
-  parent <- file.path(tutorials_path(), suffix)
-  suppressWarnings(invisible(lapply(parent, dir.create)))
-  path <- file.path(parent, paste0(suffix, ".Rmd"))
-
-  to_exercises(url, path, welcome)
-}
-
-to_exercises_from_get_started <- function() {
-  # Get started
-  package <- c("r2dii.match", "r2dii.analysis")
-  pkg <- sub("\\.", "-", package)
-
-  raw <- sprintf(
-    "https://raw.githubusercontent.com/maurolepore/%s/label-chunks", package
-  )
-  url <- sprintf("%s/vignettes/%s.Rmd", raw, pkg)
-
-  welcome <- sprintf("Get started with %s", package)
-
-  suffix <- paste0(pkg, "-get-started")
-  parent <- file.path(tutorials_path(), suffix)
-  suppressWarnings(invisible(lapply(parent, dir.create)))
-  path <- file.path(parent, paste0(suffix, ".Rmd"))
-
-  to_exercises(url, path, welcome)
-}
-
-#' @examples
-#' # README
-#' package <- c("r2dii.data", "r2dii.match", "r2dii.analysis")
-#' raw <- sprintf(
-#'   "https://raw.githubusercontent.com/maurolepore/%s/label-chunks", package
-#' )
-#'
-#' url <- sprintf("%s/README.Rmd", raw)
-#'
-#' welcome <- sprintf("First steps with %s", package)
-#'
-#' suffix <- paste0(package, "-first-steps")
-#' parent <- file.path(tutorials_path(), suffix)
-#' suppressWarnings(invisible(lapply(parent, dir.create)))
-#' path <- file.path(parent, paste0(suffix, ".Rmd"))
-#'
-#' to_exercises(url, path, welcome)
-#'
-#'
-#'
-#' # Get started
-#' package <- c("r2dii.match", "r2dii.analysis")
-#' raw <- sprintf(
-#'   "https://raw.githubusercontent.com/maurolepore/%s/label-chunks", package
-#' )
-#'
-#' url <- sprintf("%s/vignettes/%s.Rmd", raw, sub("\\.", "-", package))
-#'
-#' welcome <- sprintf("Get started with %s", package)
-#'
-#' suffix <- paste0(package, "-get-started")
-#' parent <- file.path(tutorials_path(), suffix)
-#' suppressWarnings(invisible(lapply(parent, dir.create)))
-#' path <- file.path(parent, paste0(suffix, ".Rmd"))
-#'
-#' to_exercises(url, path, welcome)
-#' @noRd
-to_exercises <- function(url, path, welcome) {
-  for (i in seq_along(path)) {
-    to_exercise(url[[i]], path[[i]], welcome[[i]])
-  }
-
-  styler::style_file(path)
-
-  invisible(url)
-}
-
-#' @export
-#' @examples
-#' host <- "https://raw.githubusercontent.com/"
-#' url <- paste0(host, "maurolepore/r2dii.analysis/label-chunks/vignettes/r2dii-analysis.Rmd")
-#' welcome = "Welcome"
-#' path <- tempfile()
-#' to_exercise(url, path)
-#' writeLines(xfun::read_utf8(path))
-#' @noRd
-NULL
-
-
-
 #' Convert a reproducible 'rmarkdown' document to 'learnr' exercises.
 #'
 #' @param from Path to read lines from, maybe a URL.
@@ -142,8 +37,18 @@ to_exercise <- function(from, to) {
   invisible(from)
 }
 
+to_exercises <- function(url, path) {
+  for (i in seq_along(path)) {
+    to_exercise(url[[i]], path[[i]])
+  }
+
+  styler::style_file(path)
+
+  invisible(url)
+}
+
 get_yaml <- function(.x) {
-  xfun::read_utf8(tutorials_path("yaml.Rmd"))
+  xfun::read_utf8(inst_path("yaml.Rmd"))
 }
 
 parse_body <- function(url) {
@@ -193,14 +98,21 @@ set_exercise_false_if_eval_false <- function(lines) {
 }
 
 get_setup <- function() {
-  xfun::read_utf8(tutorials_path("setup.Rmd"))
+  xfun::read_utf8(inst_path("setup.Rmd"))
 }
 
-tutorials_path <- function(path = NULL) {
-  parent <- "tutorials"
-  path <- ifelse(is.null(path), parent, file.path(parent, path))
+inst_paths <- function() {
+  list.files(
+    system.file(mustWork = TRUE, package = "trainr"), full.names = TRUE
+  )
+}
 
-  system.file(path, mustWork = TRUE, package = "trainr")
+inst_path <- function(path = NULL) {
+  if(is.null(path)) {
+    system.file(mustWork = TRUE, package = "trainr")
+  } else {
+    system.file(path, mustWork = TRUE, package = "trainr")
+  }
 }
 
 `%||%` <- function(x, y) {
