@@ -45,20 +45,28 @@ url <- "https://raw.githubusercontent.com/maurolepore/trainr/dump-features/READM
 
 Have a look to this file as is:
 
-``` r
+```` r
 writeLines(head(readLines(url), 20))
-```
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-`{r, include = FALSE} knitr::opts_chunk$set( collapse = TRUE, comment =
-"#>", fig.path = "man/figures/README-", out.width = "100%" )`
-
-# trainr
-
-<!-- badges: start -->
-
-<!-- badges: end -->
+#> ---
+#> output: github_document
+#> ---
+#> 
+#> <!-- README.md is generated from README.Rmd. Please edit that file -->
+#> 
+#> ```{r, include = FALSE}
+#> knitr::opts_chunk$set(
+#>   collapse = TRUE,
+#>   comment = "#>",
+#>   fig.path = "man/figures/README-",
+#>   out.width = "100%"
+#> )
+#> ```
+#> 
+#> # trainr
+#> 
+#> <!-- badges: start -->
+#> <!-- badges: end -->
+````
 
 Convert each executable chunk to an ‘learnr’ exercise.
 
@@ -78,6 +86,14 @@ writeLines(head(readLines(path), 20))
 tutorial\_options( exercise.timelimit = 60, exercise.eval = TRUE )
 
 # Any chunk should output noting or only one thing at the end. Otput mid-chunk
+
+Play.
+
+``` r
+if (interactive()) {
+  rmarkdown::run(path)
+}
+```
 
 Code that prints anything to the console should be at the end of any one
 chunk.

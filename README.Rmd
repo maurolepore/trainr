@@ -49,7 +49,7 @@ url <- "https://raw.githubusercontent.com/maurolepore/trainr/dump-features/READM
 
 Have a look to this file as is:
 
-```{r, results='asis'}
+```{r}
 writeLines(head(readLines(url), 20))
 ```
 
