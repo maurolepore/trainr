@@ -112,7 +112,7 @@ NULL
 #' @export
 #'
 #' @examples
-#' url <- "https://raw.githubusercontent.com/maurolepore/trainr/master/README.Rmd"
+#' url <- "https://raw.githubusercontent.com/maurolepore/trainr/dump-features/README.Rmd"
 #' # Look before
 #' writeLines(readLines(url))
 #'
