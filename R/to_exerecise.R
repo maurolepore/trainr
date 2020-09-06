@@ -3,7 +3,7 @@
 # Helper to get common articles with url_get_started("owner/repo@branch")
 # Helper to get common articles with url_article("owner/repo@branch", "article")
 
-write_tutorials_from_readme <- function() {
+to_exercises_from_readme <- function() {
   # README
   package <- c("r2dii.data", "r2dii.match", "r2dii.analysis")
   pkg <- sub("\\.", "-", package)
@@ -20,10 +20,10 @@ write_tutorials_from_readme <- function() {
   suppressWarnings(invisible(lapply(parent, dir.create)))
   path <- file.path(parent, paste0(suffix, ".Rmd"))
 
-  write_tutorials(url, path, welcome)
+  to_exercises(url, path, welcome)
 }
 
-write_tutorials_from_get_started <- function() {
+to_exercises_from_get_started <- function() {
   # Get started
   package <- c("r2dii.match", "r2dii.analysis")
   pkg <- sub("\\.", "-", package)
@@ -40,7 +40,7 @@ write_tutorials_from_get_started <- function() {
   suppressWarnings(invisible(lapply(parent, dir.create)))
   path <- file.path(parent, paste0(suffix, ".Rmd"))
 
-  write_tutorials(url, path, welcome)
+  to_exercises(url, path, welcome)
 }
 
 #' @examples
@@ -59,7 +59,7 @@ write_tutorials_from_get_started <- function() {
 #' suppressWarnings(invisible(lapply(parent, dir.create)))
 #' path <- file.path(parent, paste0(suffix, ".Rmd"))
 #'
-#' write_tutorials(url, path, welcome)
+#' to_exercises(url, path, welcome)
 #'
 #'
 #'
@@ -78,11 +78,11 @@ write_tutorials_from_get_started <- function() {
 #' suppressWarnings(invisible(lapply(parent, dir.create)))
 #' path <- file.path(parent, paste0(suffix, ".Rmd"))
 #'
-#' write_tutorials(url, path, welcome)
+#' to_exercises(url, path, welcome)
 #' @noRd
-write_tutorials <- function(url, path, welcome) {
+to_exercises <- function(url, path, welcome) {
   for (i in seq_along(path)) {
-    write_tutorial(url[[i]], path[[i]], welcome[[i]])
+    to_exercise(url[[i]], path[[i]], welcome[[i]])
   }
 
   styler::style_file(path)
@@ -96,7 +96,7 @@ write_tutorials <- function(url, path, welcome) {
 #' url <- paste0(host, "maurolepore/r2dii.analysis/label-chunks/vignettes/r2dii-analysis.Rmd")
 #' welcome = "Welcome"
 #' path <- tempfile()
-#' write_tutorial(url, path)
+#' to_exercise(url, path)
 #' writeLines(xfun::read_utf8(path))
 #' @noRd
 NULL
@@ -117,12 +117,12 @@ NULL
 #' writeLines(readLines(url))
 #'
 #' path <- tempfile(fileext = ".Rmd")
-#' write_tutorial(url, path)
+#' to_exercise(url, path)
 #' # Look after
 #' writeLines(readLines(path))
 #'
 #' if (interactive()) rmarkdown::run(path)
-write_tutorial <- function(from, to) {
+to_exercise <- function(from, to) {
   # TODO: Extract as get_lines()
   lines <- c(
     get_yaml(),
