@@ -179,7 +179,7 @@ tutorials_path <- function(path = NULL) {
   parent <- "tutorials"
   path <- ifelse(is.null(path), parent, file.path(parent, path))
 
-  system.file(path, mustWork = TRUE, package = "r2dii.banks")
+  system.file(path, mustWork = TRUE, package = "trainr")
 }
 
 `%||%` <- function(x, y) {

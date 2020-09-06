@@ -25,3 +25,5 @@ RoxygenNote: 7.1.1
 Imports: 
     styler,
     xfun
+Suggests: 
+    learnr
