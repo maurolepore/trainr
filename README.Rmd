@@ -46,7 +46,7 @@ library(trainr)
 Transform the static README.Rmd of this package into an interactive 'learnr' tutorial, where each executable code chunk is an exercises -- i.e. an R console.
 
 ```{r url}
-url <- "https://raw.githubusercontent.com/maurolepore/trainr/dump-features/README.Rmd"
+url <- "https://raw.githubusercontent.com/maurolepore/trainr/master/README.Rmd"
 ```
 
 Have a look to this file as is:

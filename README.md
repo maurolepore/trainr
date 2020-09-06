@@ -40,7 +40,7 @@ Transform the static README.Rmd of this package into an interactive
 i.e. an R console.
 
 ``` r
-url <- "https://raw.githubusercontent.com/maurolepore/trainr/dump-features/README.Rmd"
+url <- "https://raw.githubusercontent.com/maurolepore/trainr/master/README.Rmd"
 ```
 
 Have a look to this file as is:

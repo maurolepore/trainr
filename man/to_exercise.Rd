@@ -18,7 +18,7 @@ Invisible \code{from}.
 Convert a reproducible 'rmarkdown' document to 'learnr' exercises.
 }
 \examples{
-url <- "https://raw.githubusercontent.com/maurolepore/trainr/dump-features/README.Rmd"
+url <- "https://raw.githubusercontent.com/maurolepore/trainr/master/README.Rmd"
 # Look before
 writeLines(readLines(url))
 
