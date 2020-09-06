@@ -1,0 +1,24 @@
+Package: trainr
+Title: Create Interactive Exercises From Static Rmarkdown
+    Documents
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Mauro",
+           family = "Lepore",
+           role = c("aut", "cre"),
+           email = "maurolepore@gmail.com",
+           comment = c(ORCID = "0000-0002-1986-7988"))
+Description: Reproducible but static 'rmarkdown' documents
+    abund. For example, many R packages include them in README.Rmd and
+    vignettes. You can transform each 'rmarkdown' code chunk into an R
+    console using the learnr exercises
+    (<https://rstudio.github.io/learnr/exercises.html>). But the
+    transformation can be tedious (e.g. label unlabeled code chunks and
+    chain exercises setup).  This package automates the process -- to
+    easily create interactive exercises from static, reproducible
+    'rmarkdown` documents in the wild.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
