@@ -90,6 +90,7 @@ write_tutorials <- function(url, path, welcome) {
   invisible(url)
 }
 
+#' @export
 #' @examples
 #' host <- "https://raw.githubusercontent.com/"
 #' url <- paste0(host, "maurolepore/r2dii.analysis/label-chunks/vignettes/r2dii-analysis.Rmd")
@@ -98,27 +99,47 @@ write_tutorials <- function(url, path, welcome) {
 #' write_tutorial(url, path)
 #' writeLines(xfun::read_utf8(path))
 #' @noRd
-write_tutorial <- function(url, path, welcome = "Welcome") {
+NULL
+
+
+
+#' Convert a reproducible 'rmarkdown' document to 'learnr' exercises.
+#'
+#' @param from Path to read lines from, maybe a URL.
+#' @param to Path to write the output into.
+#'
+#' @return Invisible `from`.
+#' @export
+#'
+#' @examples
+#' url <- "https://raw.githubusercontent.com/maurolepore/trainr/master/README.Rmd"
+#' # Look before
+#' writeLines(readLines(url))
+#'
+#' path <- tempfile(fileext = ".Rmd")
+#' write_tutorial(url, path)
+#' # Look after
+#' writeLines(readLines(path))
+#'
+#' if (interactive()) rmarkdown::run(path)
+write_tutorial <- function(from, to) {
   # TODO: Extract as get_lines()
   lines <- c(
     get_yaml(),
     "\n",
     get_setup(),
     "\n",
-    # TODO: Extract as get_welcome()
-    paste("##", welcome),
-    "\n",
     # TODO: Extract as get_body()
     # FIXME:
     # This "```{r, eval = FALSE}" became this:
     # "```{r unlabeled-56, eval = FALSE, exercise.setup='setup'}" but should
     # have added `exercise = FALSE` and `exercise.eval=FALSE`
-    chain_exercise_setup(parse_body(url))
+    chain_exercise_setup(parse_body(from))
   )
 
-  xfun::write_utf8(lines, path)
+  xfun::write_utf8(lines, to)
 
-  invisible(url)
+  invisible(from)
 }
 
 get_yaml <- function(.x) {
