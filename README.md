@@ -1,5 +1,3 @@
-Turorial
-================
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -77,15 +75,29 @@ write_tutorial(url, path)
 
 Have a look to this file after the transformation.
 
-``` r
+```` r
 writeLines(head(readLines(path), 20))
-```
-
-\`\`\`{r setup, include=FALSE} library(learnr)
-
-tutorial\_options( exercise.timelimit = 60, exercise.eval = TRUE )
-
-# Any chunk should output noting or only one thing at the end. Otput mid-chunk
+#> ---
+#> title: "Turorial"
+#> output: 
+#>   learnr::tutorial:
+#>     progressive: true
+#>     allow_skip: true
+#>     df_print: default
+#> runtime: shiny_prerendered
+#> ---
+#> 
+#> 
+#> ```{r setup, include=FALSE}
+#> library(learnr)
+#> 
+#> tutorial_options(
+#>   exercise.timelimit = 60,
+#>   exercise.eval = TRUE
+#> )
+#> 
+#> # Any chunk should output noting or only one thing at the end. Otput mid-chunk
+````
 
 Play.
 

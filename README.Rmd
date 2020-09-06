@@ -62,7 +62,7 @@ write_tutorial(url, path)
 
 Have a look to this file after the transformation.
 
-```{r, results='asis'}
+```{r}
 writeLines(head(readLines(path), 20))
 ```
 
