@@ -49,8 +49,8 @@ url <- "https://raw.githubusercontent.com/maurolepore/trainr/dump-features/READM
 
 Have a look to this file as is:
 
-```{r}
-readLines(url)
+```{r, comment=""}
+writeLines(readLines(url))
 ```
 
 Convert each executable chunk to an 'learnr' exercise.
@@ -62,8 +62,8 @@ write_tutorial(url, path)
 
 Have a look to this file after the transformation.
 
-```{r}
-readLines(path)
+```{r, comment=""}
+writeLines(readLines(path))
 ```
 
 Play.
