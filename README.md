@@ -112,15 +112,3 @@ message("Bad: Output something to the console before the end of the code chunk")
 #> Bad: Output something to the console before the end of the code chunk
 x <- 1
 ```
-
-  - Also bad:
-
-<!-- end list -->
-
-``` r
-x <- 1
-# Bad: Output something to the console before the end of the code chunk
-x
-#> [1] 1
-y <- 2
-```
