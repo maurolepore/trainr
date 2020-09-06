@@ -1,24 +1,43 @@
 ---
-output: github_document
+title: "Turorial"
+output: 
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+    df_print: default
+runtime: shiny_prerendered
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r setup, include = FALSE}
+```{r setup, include=FALSE}
+library(learnr)
+
+tutorial_options(
+  exercise.timelimit = 60,
+  exercise.eval = TRUE
+)
+
+# Code that prints anything to the console should be at the end of any one chunk
 knitr::opts_chunk$set(
-  cache = FALSE,
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+  echo = FALSE,
+  # Can't be set in tutorial_options()
+  exercise = TRUE,
+  # Problematic arguments: If not set this way, output breaks code
+  results = "hold",
+  collapse = FALSE,
+  error = FALSE,
+  warning = FALSE,
+  message = FALSE
 )
 ```
 
+
+
+
+
+
 # trainr
 
-<!-- badges: start -->
-[![CRAN status](https://www.r-pkg.org/badges/version/trainr)](https://CRAN.R-project.org/package=trainr)
-<!-- badges: end -->
 
 The goal of trainr is to create interactive exercises from static 'rmarkdown' documents.
 
@@ -39,33 +58,33 @@ devtools::install_github("maurolepore/trainr")
 ```
 ## Example
 
-```{r example}
+```{r example, exercise.setup='setup'}
 library(trainr)
 ```
 
 Transform the static README.Rmd of this package into an interactive 'learnr' tutorial, where each executable code chunk is an exercises -- i.e. an R console.
 
-```{r url}
+```{r unlabeled-47, exercise.setup='example'}
 url <- "https://raw.githubusercontent.com/maurolepore/trainr/dump-features/README.Rmd"
 ```
 
 Have a look to this file as is:
 
-```{r show-before, comment=""}
-writeLines(head(readLines(url), 10))
+```{r unlabeled-53, comment="", exercise.setup='unlabeled-47'}
+writeLines(readLines(url))
 ```
 
 Convert each executable chunk to an 'learnr' exercise.
 
-```{r do-it, cache=FALSE}
-path <- tempfile("exercise", fileext = ".Rmd")
-to_exercise(url, path)
+```{r unlabeled-59, exercise.setup='unlabeled-53'}
+path <- tempfile(fileext = ".Rmd")
+write_tutorial(url, path)
 ```
 
 Have a look to this file after the transformation.
 
-```{r show-after, comment=""}
-writeLines(head(readLines(path), 10))
+```{r unlabeled-66, comment="", exercise.setup='unlabeled-59'}
+writeLines(readLines(path))
 ```
 
 Enjoy!
@@ -80,21 +99,21 @@ Code that prints anything to the console should be at the end of any one chunk.
 
 * Good:
 
-```{r}
+```{r unlabeled-82, exercise.setup='unlabeled-66'}
 x <- 1
 message("Good: Output something to the console at the end of the code chunk")
 ```
 
 * Bad:
 
-```{r}
+```{r unlabeled-89, exercise.setup='unlabeled-82'}
 message("Bad: Output something to the console before the end of the code chunk")
 x <- 1
 ```
 
 * Also bad:
 
-```{r}
+```{r unlabeled-96, exercise.setup='unlabeled-89'}
 x <- 1
 # Bad: Output something to the console before the end of the code chunk
 x

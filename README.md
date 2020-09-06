@@ -63,7 +63,7 @@ writeLines(head(readLines(url), 10))
 Convert each executable chunk to an ‘learnr’ exercise.
 
 ``` r
-path <- tempfile(fileext = ".Rmd")
+path <- tempfile("exercise", fileext = ".Rmd")
 to_exercise(url, path)
 ```
 
