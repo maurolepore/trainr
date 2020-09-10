@@ -18,37 +18,27 @@
 #'
 #' if (interactive()) rmarkdown::run(path)
 to_exercise <- function(from, to) {
-  # TODO: Extract as get_lines()
-  lines <- c(
-    get_yaml(),
-    "\n",
-    get_setup(),
-    "\n",
-    # TODO: Extract as get_body()
-    # FIXME:
-    # This "```{r, eval = FALSE}" became this:
-    # "```{r unlabeled-56, eval = FALSE, exercise.setup='setup'}" but should
-    # have added `exercise = FALSE` and `exercise.eval=FALSE`
-    chain_exercise_setup(parse_body(from))
-  )
-
+  lines <- c(get_header(), get_body(from))
   xfun::write_utf8(lines, to)
 
   invisible(from)
 }
 
-to_exercises <- function(url, path) {
-  for (i in seq_along(path)) {
-    to_exercise(url[[i]], path[[i]])
-  }
-
-  styler::style_file(path)
-
-  invisible(url)
-}
-
 get_yaml <- function(.x) {
   xfun::read_utf8(inst_path("yaml.Rmd"))
+}
+
+get_setup <- function() {
+  xfun::read_utf8(inst_path("setup.Rmd"))
+}
+
+get_header <- function() {
+  c(get_yaml(), get_setup())
+}
+
+get_body <- function(from) {
+  body <- parse_body(from)
+  chain_exercise_setup(body)
 }
 
 parse_body <- function(url) {
@@ -59,10 +49,7 @@ parse_body <- function(url) {
   out <- strip_setup(out)
   out <- strip_title(out)
   out <- strip_badges(out)
-
-
   out <- set_exercise_false_if_eval_false(out)
-
   out
 }
 
@@ -95,10 +82,6 @@ trim_whitespace <- function(lines) {
 
 set_exercise_false_if_eval_false <- function(lines) {
   sub("eval[.]*=[.]*FALSE", "eval=FALSE, exercise=FALSE", lines)
-}
-
-get_setup <- function() {
-  xfun::read_utf8(inst_path("setup.Rmd"))
 }
 
 inst_paths <- function() {

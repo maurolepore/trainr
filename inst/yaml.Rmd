@@ -1,5 +1,5 @@
 ---
-title: "Turorial"
+title: "Exercise"
 output: 
   learnr::tutorial:
     progressive: true
