@@ -19,6 +19,10 @@ strip_title <- function(lines) {
 }
 
 strip_setup <- function(lines) {
+  if (!has_chunk(lines)) {
+    return(lines)
+  }
+
   lines[indices_excluding_setup(lines)]
 }
 
@@ -29,6 +33,8 @@ indices_excluding_setup <- function(lines) {
 }
 
 setup_range <- function(lines) {
+  stopifnot(has_chunk(lines))
+
   start_id <- chunk_start_id(lines)
 
   setup_pattern <- "opts_chunk\\$set\\("
@@ -41,6 +47,10 @@ setup_range <- function(lines) {
     from = start_id[start_id < setup_id][[1]],
     to = end_id[end_id > setup_id][[1]]
   )
+}
+
+has_chunk <- function(lines) {
+  !identical(length(chunk_start_id(lines)), 0L)
 }
 
 chunk_start_id <- function(lines) {
